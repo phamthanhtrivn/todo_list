@@ -70,6 +70,7 @@ export const TaskManager: React.FC = () => {
     setTasks(tasks.filter((t) => t.id !== id));
     try {
       await taskApi.deleteTask(id);
+      fetchTasks(); // Reload the list to fix pagination
     } catch (error) {
       console.error(error);
       fetchTasks(); // Revert on failure

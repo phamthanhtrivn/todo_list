@@ -168,36 +168,33 @@ export const TaskManager: React.FC = () => {
         )}
       </div>
 
-      {/* Pagination Controls */}
-      {totalPages > 1 && (
-        <div className="flex items-center justify-center gap-3 mt-4">
-          <button
-            onClick={() => setPage((p) => Math.max(0, p - 1))}
-            disabled={page === 0}
-            className="group flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold rounded-2xl border border-slate-200/60 bg-white/80 hover:bg-sky-50 text-slate-600 hover:text-sky-600 hover:border-sky-200 hover:shadow-md active:scale-95 disabled:opacity-50 disabled:hover:bg-white/80 disabled:hover:border-slate-200/60 disabled:hover:text-slate-600 disabled:hover:shadow-none disabled:active:scale-100 disabled:cursor-not-allowed cursor-pointer backdrop-blur-sm transition-all duration-300"
-          >
-            <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
-            Trang trước
-          </button>
+      <div className="flex items-center justify-center gap-3 mt-4">
+        <button
+          onClick={() => setPage((p) => Math.max(0, p - 1))}
+          disabled={page === 0}
+          className="group flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold rounded-2xl border border-slate-200/60 bg-white/80 hover:bg-sky-50 text-slate-600 hover:text-sky-600 hover:border-sky-200 hover:shadow-md active:scale-95 disabled:opacity-50 disabled:hover:bg-white/80 disabled:hover:border-slate-200/60 disabled:hover:text-slate-600 disabled:hover:shadow-none disabled:active:scale-100 disabled:cursor-not-allowed cursor-pointer backdrop-blur-sm transition-all duration-300"
+        >
+          <ChevronLeft className="w-4 h-4 group-hover:-translate-x-0.5 transition-transform" />
+          Trang trước
+        </button>
 
-          <div className="flex items-center justify-center px-5 py-2.5 rounded-2xl bg-white/80 border border-slate-200/60 shadow-sm backdrop-blur-sm min-w-[120px]">
-            <span className="text-sm font-bold text-slate-700">
-              {page + 1}{" "}
-              <span className="text-slate-400 font-medium mx-1.5">/</span>{" "}
-              {totalPages}
-            </span>
-          </div>
-
-          <button
-            onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
-            disabled={page >= totalPages - 1}
-            className="group flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold rounded-2xl border border-slate-200/60 bg-white/80 hover:bg-sky-50 text-slate-600 hover:text-sky-600 hover:border-sky-200 hover:shadow-md active:scale-95 disabled:opacity-50 disabled:hover:bg-white/80 disabled:hover:border-slate-200/60 disabled:hover:text-slate-600 disabled:hover:shadow-none disabled:active:scale-100 disabled:cursor-not-allowed cursor-pointer backdrop-blur-sm transition-all duration-300"
-          >
-            Trang sau
-            <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
-          </button>
+        <div className="flex items-center justify-center px-5 py-2.5 rounded-2xl bg-white/80 border border-slate-200/60 shadow-sm backdrop-blur-sm min-w-[120px]">
+          <span className="text-sm font-bold text-slate-700">
+            {page + 1}{" "}
+            <span className="text-slate-400 font-medium mx-1.5">/</span>{" "}
+            {totalPages}
+          </span>
         </div>
-      )}
+
+        <button
+          onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+          disabled={page >= totalPages - 1}
+          className="group flex items-center gap-1.5 px-4 py-2.5 text-sm font-semibold rounded-2xl border border-slate-200/60 bg-white/80 hover:bg-sky-50 text-slate-600 hover:text-sky-600 hover:border-sky-200 hover:shadow-md active:scale-95 disabled:opacity-50 disabled:hover:bg-white/80 disabled:hover:border-slate-200/60 disabled:hover:text-slate-600 disabled:hover:shadow-none disabled:active:scale-100 disabled:cursor-not-allowed cursor-pointer backdrop-blur-sm transition-all duration-300"
+        >
+          Trang sau
+          <ChevronRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
+        </button>
+      </div>
     </div>
   );
 };

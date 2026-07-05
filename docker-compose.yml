@@ -4,14 +4,33 @@ services:
   db:
     image: postgres:15-alpine
     container_name: todo_db
-    environment:
-      POSTGRES_USER: ${POSTGRES_USER}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      POSTGRES_DB: ${POSTGRES_DB}
+    env_file:
+      - ./backend/.env
     ports:
-      - "${POSTGRES_PORT}:5432"
+      - "5434:5432" # 5434 on host mapped to 5432 in container (based on DB_PORT in .env)
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: todo_backend
+    ports:
+      - "8080:8080"
+    env_file:
+      - ./backend/.env
+    environment:
+      # Override the DB host to point to the docker-compose service 'db'
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/$${POSTGRES_DB}
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:
